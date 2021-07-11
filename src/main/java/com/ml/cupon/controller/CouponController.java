@@ -36,7 +36,7 @@ public class CouponController {
 	}
 	
 
-	@GetMapping(value = "index", produces = "application/json")
+	@GetMapping(value = "/", produces = "application/json")
 	public ResponseEntity<Object> getStats() {
 		return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body("Hola");
 	}
