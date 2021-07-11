@@ -26,6 +26,9 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
 	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+	// https://mvnrepository.com/artifact/com.google.cloud.tools/appengine-gradle-plugin
+	implementation group: 'com.google.cloud.tools', name: 'appengine-gradle-plugin', version: '2.4.1'
+	
 }
 
 test {
