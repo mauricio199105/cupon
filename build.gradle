@@ -8,6 +8,11 @@ group = 'com.ml'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
+jar{
+  baseName = 'cupon'
+  version = '1.0-SNAPSHOT'
+} 
+
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
