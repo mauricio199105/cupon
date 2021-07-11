@@ -30,7 +30,7 @@ public class CouponController {
 			return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(couponResult);
 		} else {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).contentType(MediaType.APPLICATION_JSON)
-					.body("Items not found!.");
+					.body("Items not found!");
 		}
 
 	}
