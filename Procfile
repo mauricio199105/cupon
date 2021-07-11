@@ -1,1 +1,1 @@
-web: java -Dserver.port=8080 -jar target/cupon-0.0.1-SNAPSHOT.jar
+web: java -jar build/libs/java-getting-started-1.0.jar
