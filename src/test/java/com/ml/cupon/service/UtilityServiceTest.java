@@ -55,5 +55,29 @@ public class UtilityServiceTest {
 		// assertThat(resultExpected, containsInAnyOrder(resultActual));
 		assertEquals(resultExpected, resultActual);
 	}
+	
+	
+	@Test
+	public void calculateOnEqualAmountTest() {
+
+		Map<String, Float> itemsMap = new HashMap<String, Float>();
+
+		itemsMap.put("MLA803174898", 100f);
+		itemsMap.put("MLA803174894", 1000f);
+		itemsMap.put("MLA803174788", 100f);
+		itemsMap.put("MLA803086664", 100f);
+		itemsMap.put("MLA810645375", 16999f);
+		itemsMap.put("MLA844702264", 100f);
+
+		List<String> resultActual = new ArrayList<>();
+
+	
+		resultActual.add("MLA803174894");
+		resultActual.add("1000.0");
+
+		List<String> resultExpected = this.utilityService.calculate(itemsMap, 1000f);
+		// assertThat(resultExpected, containsInAnyOrder(resultActual));
+		assertEquals(resultExpected, resultActual);
+	}
 
 }

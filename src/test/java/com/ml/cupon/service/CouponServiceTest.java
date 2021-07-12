@@ -94,4 +94,52 @@ public class CouponServiceTest {
 
 	}
 
+	@Test
+	public void evaluateCouponWhenOneItemIsEqualToAmountTest() {
+
+		String[] itemsIn = { "MLA803174898", "MLA803174894", "MLA803174788", "MLA803086664", "MLA810645375",
+				"MLA844702264" };
+
+		ItemDTO itemA = ItemDTO.builder().id("MLA803174898").price(100f).build();
+		ItemDTO itemB = ItemDTO.builder().id("MLA803174894").price(1000f).build();
+		ItemDTO itemC = ItemDTO.builder().id("MLA803174788").price(100f).build();
+		ItemDTO itemD = ItemDTO.builder().id("MLA803086664").price(100f).build();
+		ItemDTO itemE = ItemDTO.builder().id("MLA810645375").price(16999f).build();
+		ItemDTO itemF = ItemDTO.builder().id("MLA844702264").price(100f).build();
+
+		CouponDTO couponIn = CouponDTO.builder().item_ids(itemsIn).amount(1000f).build();
+		List<ItemResponseDTO> itemsResponse = Arrays.asList(ItemResponseDTO.builder().code(200).body(itemA).build(),
+				ItemResponseDTO.builder().code(200).body(itemB).build(),
+				ItemResponseDTO.builder().code(200).body(itemC).build(),
+				ItemResponseDTO.builder().code(200).body(itemD).build(),
+				ItemResponseDTO.builder().code(200).body(itemE).build(),
+				ItemResponseDTO.builder().code(200).body(itemF).build());
+
+		Map<String, Float> itemsMap = new HashMap<String, Float>();
+
+		itemsMap.put("MLA803174898", 100f);
+		itemsMap.put("MLA803174898", 1000f);
+		itemsMap.put("MLA803174898", 100f);
+		itemsMap.put("MLA803174898", 100f);
+		itemsMap.put("MLA803174898", 16999f);
+		itemsMap.put("MLA803174898", 100f);
+
+		List<String> resultActual = new ArrayList<>();
+
+	
+		resultActual.add("MLA844702264");
+		resultActual.add("1000.0");
+
+		String[] resultIds = { "MLA844702264" };
+		CouponDTO couponActual = CouponDTO.builder().item_ids(resultIds).amount(1000f).build();
+
+		when(this.consumerService.getItems(couponIn)).thenReturn(itemsResponse);
+		when(this.utilityService.calculate(Mockito.anyMap(), Mockito.anyFloat())).thenReturn(resultActual);
+
+		CouponDTO couponExpected = this.couponServiceImpl.evaluateCoupon(couponIn);
+
+		assertEquals(couponExpected, couponActual);
+		assertEquals(couponExpected, couponActual);
+
+	}
 }

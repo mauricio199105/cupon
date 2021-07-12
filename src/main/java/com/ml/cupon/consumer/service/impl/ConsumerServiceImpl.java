@@ -2,6 +2,7 @@ package com.ml.cupon.consumer.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
@@ -13,9 +14,10 @@ import com.ml.cupon.dto.ItemResponseDTO;
 
 @Component
 public class ConsumerServiceImpl implements ConsumerService {
-	
-	public static final String URL_BASE = "https://api.mercadolibre.com/items?ids=";  
 
+	public static final String URL_BASE = "https://api.mercadolibre.com/items?ids=";
+
+	@Autowired
 	private RestTemplate restTemplate;
 
 	public ConsumerServiceImpl(RestTemplate restTemplate) {
