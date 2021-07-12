@@ -49,6 +49,16 @@ public class CouponControllerTest {
 	}
 	
 	@Test
+	public void evaluateItemsWithoutAmount() throws Exception {
+	
+		String[] item = {"MLA1", "MLA2", "MLA3", "MLA4", "MLA6", "MLA5"};
+		CouponDTO coupon = CouponDTO.builder().amount(0f).item_ids(item).build();
+		this.mock.perform(post("/coupon").contentType(APPLICATION_JSON_UTF8).content(asJsonString(coupon)))
+				.andExpect(status().isBadRequest());
+
+	}
+	
+	@Test
 	public void getIndexTest() throws Exception {
 		this.mock.perform(get("/").accept(MimeTypeUtils.APPLICATION_JSON_VALUE)).andExpect(status().isOk());
 	}

@@ -10,11 +10,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.event.annotation.BeforeTestClass;
 
@@ -25,7 +24,7 @@ import com.ml.cupon.dto.ItemResponseDTO;
 import com.ml.cupon.service.impl.CouponServiceImpl;
 
 @SpringBootTest
-@ExtendWith(MockitoExtension.class)
+@AutoConfigureMockMvc
 public class CouponServiceTest {
 
 	@InjectMocks
