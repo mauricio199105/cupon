@@ -1,11 +1,15 @@
 package com.ml.cupon.consumer.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import com.ml.cupon.consumer.service.ConsumerService;
@@ -15,6 +19,7 @@ import com.ml.cupon.dto.ItemResponseDTO;
 @Component
 public class ConsumerServiceImpl implements ConsumerService {
 
+	private static final Logger LOG = LoggerFactory.getLogger(ConsumerServiceImpl.class);
 	public static final String URL_BASE = "https://api.mercadolibre.com/items?ids=";
 
 	@Autowired
@@ -25,10 +30,15 @@ public class ConsumerServiceImpl implements ConsumerService {
 	}
 
 	public List<ItemResponseDTO> getItems(CouponDTO cupon) {
+		List<ItemResponseDTO> itemsResponse = new ArrayList<>();
+		try {
+			itemsResponse = restTemplate.exchange(buildUrl(cupon), HttpMethod.GET, null,
+					new ParameterizedTypeReference<List<ItemResponseDTO>>() {
+					}).getBody();
+		} catch (RestClientException e) {
+			LOG.error("Error occurred while consuming the service", e);
+		}
 
-		List<ItemResponseDTO> itemsResponse = restTemplate.exchange(buildUrl(cupon), HttpMethod.GET, null,
-				new ParameterizedTypeReference<List<ItemResponseDTO>>() {
-				}).getBody();
 		return itemsResponse;
 	}
 
