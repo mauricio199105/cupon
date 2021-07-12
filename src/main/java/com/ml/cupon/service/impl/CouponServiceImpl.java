@@ -1,5 +1,6 @@
 package com.ml.cupon.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -27,23 +28,31 @@ public class CouponServiceImpl implements CouponService {
 	}
 
 	public CouponDTO evaluateCoupon(CouponDTO cupon) {
-
+		
+		CouponDTO coupon = new CouponDTO();
 		List<ItemResponseDTO> itemsList = this.consumerService.getItems(cupon);
-		Map<String, Float> items = itemsList.stream().filter(item -> item.getCode() == 200).map(item -> item.getBody())
-				.collect(Collectors.toMap(item -> item.getId(), item -> item.getPrice()));
+		
+		if (!itemsList.isEmpty()) {
+			Map<String, Float> items = itemsList.stream().filter(item -> item.getCode() == 200)
+					.map(item -> item.getBody())
+					.collect(Collectors.toMap(item -> item.getId(), item -> item.getPrice()));
 
-		List<String> itemsEvaluated = this.utilityService.calculate(items, cupon.getAmount());
-		
-		float montoUsado = 0.00f;
-		String[] productos = new String[itemsEvaluated.size() - 1];
-		
-		if (!itemsEvaluated.isEmpty()) {
-			montoUsado = Float.valueOf(itemsEvaluated.get(itemsEvaluated.size() - 1));
-			itemsEvaluated.remove(itemsEvaluated.get(itemsEvaluated.size() - 1));
-			productos = itemsEvaluated.toArray(new String[itemsEvaluated.size()]);
+			List<String> itemsEvaluated = this.utilityService.calculate(items, cupon.getAmount());
+
+			float montoUsado = 0.00f;
+			String[] productos = new String[itemsEvaluated.size() - 1];
+
+			if (!itemsEvaluated.isEmpty()) {
+				montoUsado = Float.valueOf(itemsEvaluated.get(itemsEvaluated.size() - 1));
+				itemsEvaluated.remove(itemsEvaluated.get(itemsEvaluated.size() - 1));
+				productos = itemsEvaluated.toArray(new String[itemsEvaluated.size()]);
+			}
+
+			coupon = CouponDTO.builder().amount(montoUsado).item_ids(productos).build();
+
 		}
 
-		return CouponDTO.builder().amount(montoUsado).item_ids(productos).build();
+		return coupon;
 
 	}
 
