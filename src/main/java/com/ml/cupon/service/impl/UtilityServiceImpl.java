@@ -22,6 +22,12 @@ public class UtilityServiceImpl implements UtilityService {
 
 		fillBackpack(backpack_base, elements, backpack_opt, false);
 
+		List<String> result = generateList(backpack_opt);
+
+		return result;
+	}
+
+	private List<String> generateList(Backpack backpack_opt) {
 		List<String> result = new ArrayList<>();
 		for (int i = 0; i < backpack_opt.getElements().length; i++) {
 			if (backpack_opt.getElements()[i] != null) {
@@ -31,7 +37,6 @@ public class UtilityServiceImpl implements UtilityService {
 		}
 
 		result.add(String.valueOf(backpack_opt.getWeight()));
-
 		return result;
 	}
 
@@ -45,7 +50,7 @@ public class UtilityServiceImpl implements UtilityService {
 		return elements;
 	}
 
-	public static void fillBackpack(Backpack backpack_base, ElementBackpack[] elements, Backpack backpack_opt,
+	private void fillBackpack(Backpack backpack_base, ElementBackpack[] elements, Backpack backpack_opt,
 			boolean status) {
 		// Valido si esta llena
 		if (status) {

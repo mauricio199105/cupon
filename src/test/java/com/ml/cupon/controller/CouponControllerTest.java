@@ -1,5 +1,6 @@
 package com.ml.cupon.controller;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -11,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.util.MimeTypeUtils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ml.cupon.dto.CouponDTO;
@@ -44,6 +46,11 @@ public class CouponControllerTest {
 		this.mock.perform(post("/coupon").contentType(APPLICATION_JSON_UTF8).content(asJsonString(coupon)))
 				.andExpect(status().isNotFound());
 
+	}
+	
+	@Test
+	public void getIndexTest() throws Exception {
+		this.mock.perform(get("/").accept(MimeTypeUtils.APPLICATION_JSON_VALUE)).andExpect(status().isOk());
 	}
 
 

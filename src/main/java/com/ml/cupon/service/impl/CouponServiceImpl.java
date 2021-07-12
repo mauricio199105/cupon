@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ml.cupon.consumer.service.ConsumerService;
@@ -15,7 +16,9 @@ import com.ml.cupon.service.UtilityService;
 @Service
 public class CouponServiceImpl implements CouponService {
 
+	@Autowired
 	private UtilityService utilityService;
+	@Autowired
 	private ConsumerService consumerService;
 
 	public CouponServiceImpl(UtilityService utilService, ConsumerService consumidorService) {
