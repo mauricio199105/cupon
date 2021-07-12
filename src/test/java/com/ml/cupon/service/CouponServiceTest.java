@@ -88,6 +88,7 @@ public class CouponServiceTest {
 //		CouponDTO couponExpected = this.couponServiceImpl.evaluateCoupon(couponIn);
 //
 //		assertEquals(couponExpected, couponActual);
+//		assertEquals(couponExpected, couponActual);
 
 	}
 
