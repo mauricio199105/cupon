@@ -7,10 +7,7 @@ plugins {
 	
 }
 
-jacoco {
-    toolVersion = "0.8.7"
-    reportsDirectory = layout.buildDirectory.dir('$buildDir/reports/jacoco')
-}
+
 
 group = 'com.ml'
 version = '0.0.1-SNAPSHOT'
@@ -48,14 +45,19 @@ dependencies {
 }
 
 test {
-	finalizedBy jacocoTestReport
+	useJUnitPlatform()
+	jacocoTestReport
 }
 
 jacocoTestReport {
     dependsOn test // tests are required to run before generating the report
-     reports {
-        xml.required = false
-        csv.required = false
-        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+    
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                "com.ml.cupon.dto"
+            ])
+        }))
     }
 }
+
