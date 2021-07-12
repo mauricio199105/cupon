@@ -41,3 +41,16 @@ que maximice el total gastado sin excederlo
 	https://whispering-forest-20515.herokuapp.com/swagger-ui/index.html?configUrl=/api-docs/swagger-config#/coupon-controller/evaluateCoupon
 		
 		Documentación con Swagger.
+
+# Configuración entorno local
+
+Lo primero que debemos hacer es tener git instalado para clonar el proyecto con la siguiente comando git clone https://github.com/mauricio199105/cupon.git, asumiremos que el lector tiene java 8 y su IDE de preferencia instalada y previamente configurado. El branch principal es MASTER.
+
+La apliación localmente cuando la corre lo hace por la siguiente dirección http://localhost:8080/coupon
+
+# Autor
+
+Andrés Mauricio Mejía Ramírez
+
+	linkedin -> https://www.linkedin.com/in/andr%C3%A9s-m-5b031549/
+
