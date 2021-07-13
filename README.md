@@ -14,8 +14,8 @@ que maximice el total gastado sin excederlo
 	Heroku
 	
 # API
-
-	https://whispering-forest-20515.herokuapp.com/coupon
+	
+ Endpoint ->	https://whispering-forest-20515.herokuapp.com/coupon
 		
 		Tipo: POST
 		
@@ -25,11 +25,23 @@ que maximice el total gastado sin excederlo
 		
 		- Respuesta al tener otro tipo de errores: 400 (BAD_REQUEST)
 		
-		Body ingreso:
+		Body:
 			
 			{
 				"item_ids": ["MLA803174898", "MLA803174894", "MLA803174788", "MLA803086664", "MLA810645375", "MLA844702264"],
 				"amount": 1500
+			}
+			
+		Response 
+			{
+			    "item_ids": [
+				"MLA803086664",
+				"MLA844702264",
+				"MLA803174898",
+				"MLA803174788",
+				"MLA803174894"
+			    ],
+			    "total": 1400
 			}
 		
 	https://whispering-forest-20515.herokuapp.com/
