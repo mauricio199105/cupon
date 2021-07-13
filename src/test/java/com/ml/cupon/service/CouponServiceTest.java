@@ -19,6 +19,7 @@ import org.springframework.test.context.event.annotation.BeforeTestClass;
 
 import com.ml.cupon.consumer.service.ConsumerService;
 import com.ml.cupon.dto.CouponDTO;
+import com.ml.cupon.dto.CouponDtoResponse;
 import com.ml.cupon.dto.ItemDTO;
 import com.ml.cupon.dto.ItemResponseDTO;
 import com.ml.cupon.service.impl.CouponServiceImpl;
@@ -81,12 +82,12 @@ public class CouponServiceTest {
 		resultActual.add("1400.0");
 
 		String[] resultIds = { "MLA803086664", "MLA844702264", "MLA803174788", "MLA803174898", "MLA803174894" };
-		CouponDTO couponActual = CouponDTO.builder().item_ids(resultIds).amount(1400f).build();
+		CouponDtoResponse couponActual = CouponDtoResponse.builder().item_ids(resultIds).total(1400f).build();
 
 		when(this.consumerService.getItems(couponIn)).thenReturn(itemsResponse);
 		when(this.utilityService.calculate(Mockito.anyMap(), Mockito.anyFloat())).thenReturn(resultActual);
 
-		CouponDTO couponExpected = this.couponServiceImpl.evaluateCoupon(couponIn);
+		CouponDtoResponse couponExpected = this.couponServiceImpl.evaluateCoupon(couponIn);
 
 		assertEquals(couponExpected, couponActual);
 		assertEquals(couponExpected, couponActual);
@@ -125,17 +126,16 @@ public class CouponServiceTest {
 
 		List<String> resultActual = new ArrayList<>();
 
-	
 		resultActual.add("MLA844702264");
 		resultActual.add("1000.0");
 
 		String[] resultIds = { "MLA844702264" };
-		CouponDTO couponActual = CouponDTO.builder().item_ids(resultIds).amount(1000f).build();
+		CouponDtoResponse couponActual = CouponDtoResponse.builder().item_ids(resultIds).total(1000f).build();
 
 		when(this.consumerService.getItems(couponIn)).thenReturn(itemsResponse);
 		when(this.utilityService.calculate(Mockito.anyMap(), Mockito.anyFloat())).thenReturn(resultActual);
 
-		CouponDTO couponExpected = this.couponServiceImpl.evaluateCoupon(couponIn);
+		CouponDtoResponse couponExpected = this.couponServiceImpl.evaluateCoupon(couponIn);
 
 		assertEquals(couponExpected, couponActual);
 		assertEquals(couponExpected, couponActual);

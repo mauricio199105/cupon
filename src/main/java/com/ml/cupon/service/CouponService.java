@@ -1,9 +1,10 @@
 package com.ml.cupon.service;
 
 import com.ml.cupon.dto.CouponDTO;
+import com.ml.cupon.dto.CouponDtoResponse;
 
 public interface CouponService {
 
-	CouponDTO evaluateCoupon(CouponDTO coupon);
+	CouponDtoResponse evaluateCoupon(CouponDTO coupon);
 
 }

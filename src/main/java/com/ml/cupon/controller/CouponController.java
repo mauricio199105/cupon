@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ml.cupon.dto.CouponDTO;
+import com.ml.cupon.dto.CouponDtoResponse;
 import com.ml.cupon.service.CouponService;
 
 @RestController
@@ -29,8 +30,8 @@ public class CouponController {
 	@PostMapping(value = "/coupon", produces = "application/json")
 	public ResponseEntity<Object> evaluateCoupon(@RequestBody @Validated CouponDTO coupon) {
 		if (this.validateParametersIn(coupon)) {
-			CouponDTO couponResult = this.couponService.evaluateCoupon(coupon);
-			if (couponResult.getAmount() > 0) {
+			CouponDtoResponse couponResult = this.couponService.evaluateCoupon(coupon);
+			if (couponResult.getTotal() > 0) {
 				return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(couponResult);
 			} else {
 				return ResponseEntity.status(HttpStatus.NOT_FOUND).contentType(MediaType.APPLICATION_JSON)

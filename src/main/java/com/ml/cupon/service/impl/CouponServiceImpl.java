@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.ml.cupon.consumer.service.ConsumerService;
 import com.ml.cupon.dto.CouponDTO;
+import com.ml.cupon.dto.CouponDtoResponse;
 import com.ml.cupon.dto.ItemResponseDTO;
 import com.ml.cupon.service.CouponService;
 import com.ml.cupon.service.UtilityService;
@@ -26,9 +27,9 @@ public class CouponServiceImpl implements CouponService {
 		this.consumerService = consumidorService;
 	}
 
-	public CouponDTO evaluateCoupon(CouponDTO cupon) {
+	public CouponDtoResponse evaluateCoupon(CouponDTO cupon) {
 		
-		CouponDTO coupon = new CouponDTO();
+		CouponDtoResponse coupon = new CouponDtoResponse();
 		List<ItemResponseDTO> itemsList = this.consumerService.getItems(cupon);
 		
 		if (!itemsList.isEmpty()) {
@@ -47,7 +48,7 @@ public class CouponServiceImpl implements CouponService {
 				productos = itemsEvaluated.toArray(new String[itemsEvaluated.size()]);
 			}
 
-			coupon = CouponDTO.builder().amount(montoUsado).item_ids(productos).build();
+			coupon = CouponDtoResponse.builder().total(montoUsado).item_ids(productos).build();
 
 		}
 
