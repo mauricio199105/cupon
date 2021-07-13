@@ -23,7 +23,7 @@ public class Backpack {
 	}
 
 	/**
-	 * Este metodo permite adicionar el item
+	 * We clean the backpack
 	 * 
 	 * @param item
 	 */
@@ -31,9 +31,9 @@ public class Backpack {
 
 		for (int i = 0; i < this.elements.length; i++) {
 			if (this.elements[i] == null) {
-				this.elements[i] = item; // lo anade
-				this.benefit += item.getBenefit(); // aumenta el beneficio
-				this.weight += item.getWeight(); // Aumenta el peso
+				this.elements[i] = item;
+				this.benefit += item.getBenefit();
+				this.weight += item.getWeight();
 				break;
 			}
 		}
@@ -51,35 +51,35 @@ public class Backpack {
 	}
 
 	/**
-	 * Elimina elemento ingresado por parametro
+	 * Delete element entered by parameter
 	 * 
 	 * @param element
 	 */
 	public void deleteElement(ElementBackpack element) {
 		for (int i = 0; i < this.elements.length; i++) {
 			if (this.elements[i].equals(element)) {
-				this.elements[i] = null; // el elemento fuera
-				this.weight -= element.getWeight(); // Reduce el peso
-				this.benefit -= element.getBenefit(); // reduce el beneficio
+				this.elements[i] = null;
+				this.weight -= element.getWeight();
+				this.benefit -= element.getBenefit();
 				break;
 			}
 		}
 	}
 
 	/**
-	 * Indica si existe un elemento
+	 * Indicates if an element exists
 	 * 
 	 * @param element
 	 * @return
 	 */
 	public boolean existElement(ElementBackpack element) {
-		boolean estado = false;
+		boolean status = false;
 		for (int i = 0; i < this.elements.length; i++) {
 			if (this.elements[i] != null && this.elements[i].equals(element)) {
-				estado = true;
+				status = true;
 			}
 		}
-		return estado;
+		return status;
 	}
 
 }
